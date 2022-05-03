@@ -1,0 +1,32 @@
+pipe line {
+    agent any
+    stages {
+        stages ('checkout code') {
+            steps {
+                // https://github.com/dayanand7778/groovypipeline.git
+
+            }
+        }
+        stages ('run unit test cases') {
+            steps {
+                bat "mvn clean test"
+            }
+        }
+        stages ('publish test reports') {
+            steps {
+                junit
+            }
+        }
+        stages ('build code') {
+            steps {
+                bat "mvn packages"
+            }
+        }
+        stages ('archive results') {
+            steps {
+                archive artifacts 'target/*.war'
+            }
+        }
+
+    }
+}
